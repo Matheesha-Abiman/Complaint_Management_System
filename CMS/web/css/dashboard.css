@@ -1,0 +1,197 @@
+/* dashboard.css */
+
+/* Root theme variables */
+:root {
+    --primary: #2E86C1;
+    --secondary: #F7F9F9;
+    --accent: #AED6F1;
+    --danger: #E74C3C;
+    --success: #28B463;
+    --warning: #F1C40F;
+    --info: #17A2B8;
+    --purple: #9B59B6;
+    --gray: #7F8C8D;
+    --text-dark: #2C3E50;
+    --text-light: #ffffff;
+    --border-radius: 12px;
+    --transition: all 0.3s ease-in-out;
+    --shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: var(--secondary);
+    color: var(--text-dark);
+    padding: 1rem 15rem 1rem 15rem;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--primary);
+    padding: 1rem 1.5rem;
+    color: var(--text-light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 1rem;
+}
+
+.top-bar a {
+    background: var(--danger);
+    padding: 0.4rem 1rem;
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.top-bar a:hover {
+    background: #c0392b;
+}
+
+h1, h2 {
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+}
+
+form {
+    background: #ffffff;
+    padding: 0.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 0.5rem;
+}
+
+form input[type="text"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+form input[type="text"]:focus,
+form textarea:focus,
+form select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 5px rgba(46, 134, 193, 0.4);
+}
+
+form button {
+    background: var(--primary);
+    color: var(--text-light);
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+form button:hover {
+    background: var(--success);
+}
+
+form button.delete-btn {
+    background: var(--danger);
+}
+
+form button.delete-btn:hover {
+    background: #c0392b;
+}
+
+/* Additional Colored Buttons */
+.btn-primary { background: var(--primary); }
+.btn-success { background: var(--success); }
+.btn-danger { background: var(--danger); }
+.btn-warning { background: var(--warning); }
+.btn-info { background: var(--info); }
+.btn-purple { background: var(--purple); }
+.btn-gray { background: var(--gray); }
+
+.btn-primary:hover { background: #21618C; }
+.btn-success:hover { background: #1D8348; }
+.btn-danger:hover { background: #C0392B; }
+.btn-warning:hover { background: #D4AC0D; }
+.btn-info:hover { background: #138496; }
+.btn-purple:hover { background: #884EA0; }
+.btn-gray:hover { background: #626567; }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+table th, table td {
+    padding: 0.5rem;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+table tr:hover {
+    background: #f0f8ff;
+}
+
+em {
+    font-style: italic;
+    color: #999;
+}
+
+#esubmit-btn {
+    background: var(--primary);
+    color: var(--text-light);
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+#esubmit-btn:hover {
+    background: #21618C; /* darker blue */
+}
+
+#eupdate-btn {
+    background: var(--success);
+    color: var(--text-light);
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+#eupdate-btn:hover {
+    background: #1D8348; /* darker green */
+}
+
+#edelete-btn {
+    background: var(--danger);
+    color: var(--text-light);
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+#edelete-btn:hover {
+    background: #C0392B; /* darker red */
+}
+
