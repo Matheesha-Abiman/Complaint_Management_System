@@ -23,10 +23,31 @@ public class EmployeeComplaintServlet extends HttpServlet {
         complaintDAO = new ComplaintDAO(ds);
     }
 
+//    @Override
+//    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//
+//
+//        HttpSession session = request.getSession();
+//        if (session == null || session.getAttribute("full_name") == null) {
+//            response.sendRedirect("signin.jsp");
+//            return;
+//        }
+//
+//        User user = (User) session.getAttribute("user");
+//
+//        try {
+//            List<Complaint> complaints = complaintDAO.findByUserId(user.getId());
+//            request.setAttribute("complaints", complaints);
+//            request.getRequestDispatcher("/employee_dashboard.jsp").forward(request, response);
+//        } catch (SQLException e) {
+//            throw new ServletException("Failed to load user complaints", e);
+//        }
+//    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
 
         HttpSession session = request.getSession();
         if (session == null || session.getAttribute("full_name") == null) {
@@ -38,14 +59,36 @@ public class EmployeeComplaintServlet extends HttpServlet {
 
         try {
             List<Complaint> complaints = complaintDAO.findByUserId(user.getId());
+
+            // Count complaint statuses
+            int resolvedCount = 0;
+            int pendingCount = 0;
+            int inProgressCount = 0;
+
+            for (Complaint c : complaints) {
+                String status = c.getStatus();
+                if ("RESOLVED".equalsIgnoreCase(status)) {
+                    resolvedCount++;
+                } else if ("PENDING".equalsIgnoreCase(status)) {
+                    pendingCount++;
+                } else if ("IN_PROGRESS".equalsIgnoreCase(status)) {
+                    inProgressCount++;
+                }
+            }
+
             request.setAttribute("complaints", complaints);
+            request.setAttribute("resolvedCount", resolvedCount);
+            request.setAttribute("pendingCount", pendingCount);
+            request.setAttribute("inProgressCount", inProgressCount);
+
             request.getRequestDispatcher("/employee_dashboard.jsp").forward(request, response);
         } catch (SQLException e) {
             throw new ServletException("Failed to load user complaints", e);
         }
     }
 
-@Override
+
+    @Override
 protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
