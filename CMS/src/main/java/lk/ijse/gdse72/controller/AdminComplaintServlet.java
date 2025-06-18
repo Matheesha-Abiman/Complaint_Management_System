@@ -22,11 +22,42 @@ public class AdminComplaintServlet extends HttpServlet {
         complaintDAO = new ComplaintDAO(ds);
     }
 
+    // @Override
+    // protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    //     try {
+    //         List<Complaint> complaints = complaintDAO.findAllWithUserDetails();
+    //         req.setAttribute("complaints", complaints);
+    //         req.getRequestDispatcher("/admin_dashboard.jsp").forward(req, resp);
+    //     } catch (SQLException e) {
+    //         throw new ServletException("Failed to load complaints", e);
+    //     }
+    // }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             List<Complaint> complaints = complaintDAO.findAllWithUserDetails();
+
+            // Count complaint statuses
+            int resolvedCount = 0;
+            int pendingCount = 0;
+            int inProgressCount = 0;
+
+            for (Complaint c : complaints) {
+                String status = c.getStatus();
+                if ("RESOLVED".equalsIgnoreCase(status)) {
+                    resolvedCount++;
+                } else if ("PENDING".equalsIgnoreCase(status)) {
+                    pendingCount++;
+                } else if ("IN_PROGRESS".equalsIgnoreCase(status)) {
+                    inProgressCount++;
+                }
+            }
+
             req.setAttribute("complaints", complaints);
+            req.setAttribute("resolvedCount", resolvedCount);
+            req.setAttribute("pendingCount", pendingCount);
+            req.setAttribute("inProgressCount", inProgressCount);
+
             req.getRequestDispatcher("/admin_dashboard.jsp").forward(req, resp);
         } catch (SQLException e) {
             throw new ServletException("Failed to load complaints", e);
